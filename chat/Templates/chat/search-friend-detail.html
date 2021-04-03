@@ -1,0 +1,141 @@
+{% extends "posts/base.html" %}
+{% block content %}
+{% if friend.Added == request.user %}
+<div class="chat-page" style="max-width: 500 !important; margin: auto; margin-top: 4%; font-family: sans-serif; letter-spacing: 0.5px; ">
+  <div class="chat-header" style="border: 1px solid #ccc; width: 100%; height: 10%; border-bottom: none; display: inline-block; background-color: #007bff">
+    <div class="header-image" style="border-radius: 50%; width: 40px; margin-left: 5%; margin-top: 12px; float: left;">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Accepter.profile.image.url }} ">
+  </div>
+  <div class="header-name" style="width: 120px; float: left; margin-top: 10px;">
+    <h4 style="font-size: 20px; margin-left: 10px; color: #fff;">{{ friend.Accepter.username }}</h4>
+  </div>
+
+</div>
+<div class="chat-box" style="padding: 0 0 50px 0;">
+  <div class="chats" style="border: 1px solid #ccc; overflow: hidden; padding-bottom: 30px;">
+    <div class="msg-page" style="padding: 30px 15px 0 25px;">
+      <div class="msg-pagetwo" style="height: 516px; overflow-y: auto;">
+
+  {% for msgss in msgs %}
+  {% if msgss.sender != request.user %}
+  <div class="incoming-chat" style="">
+    <div class="incoming-chat-img" style="display: inline-block; width: 20px; float: left;">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Accepter.profile.image.url }}">
+    </div>
+    <div class="incoming-message" style="display: inline-block; padding: 0 0 0 10px; vertical-align: top; width: 92%;">
+    <div class="incoming-message-inbox" style="width: 57%;">
+      <p style="background: #efefef none repeat scroll 0 0; border-radius: 10px; color: #646464; font-size: 14px; margin: 0; padding: 5px 10px 5px 12px; width: 100%;">{{ msgss.msg }}</p>
+      <span style="color: #777; display: block; font-size: 12px; margin: 8px 0 0;">{{ msgss.time_sent }}</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+    {% if msgss.sender == request.user %}
+    <div class="outgoing-chat" style="overflow: hidden; margin: 26px 20px;">
+      
+    <div class="outgoing-message-inbox" style="float: left; width: 46%; margin-left: 45%;">
+        <p style="background: #007bff none repeat scroll 0 0; color: #fff; font-size: 14px; margin: 14px; width: 100%; padding: 5px 10px 5px 12px; border-radius: 10px;">{{ msgss.msg }}</p>
+      <span style="color: #777; display: block; font-size: 12px; margin: 8px 0 0;">{{ msgss.time_sent }}</span>
+    </div>
+    <div class="outgoing-chat-img" style="display: inline-block; width: 20px; float: right; ">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Added.profile.image.url }}">
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %} 
+</div>
+</div>
+</div>
+</div>
+
+<div class="message-box" style="position: relative; height: 10px; background-color: #007bff; display:flex;">
+  <div class="message-input" style="float: right; margin-top: 13px; margin-right: 20px; outline: none !important; border-radius: 20px; width: 100% !important; background-color: #fff; ">
+  <form method="POST" class="form-signin">
+            {% csrf_token %}
+          <div style="width:80%; display:flex; border: none !important; border-radius: 20px !important;">
+            {{form}}
+     <div class="input-class-append" style="width:20rem;"> 
+
+    <div style="position:relative; right:30%;">
+      <button type="submit" style="width:10%; padding:5% 0 5% 15%;  background:transparent; border:none"><i class="fa fa-paper-plane"></i></button>
+    </div>
+
+  </div>
+</div>
+  </form>
+
+</div>
+</div>
+</div>
+{% else %}
+<div class="chat-page" style="max-width: 500 !important; margin: auto; margin-top: 4%; font-family: sans-serif; letter-spacing: 0.5px; ">
+  <div class="chat-header" style="border: 1px solid #ccc; width: 100%; height: 10%; border-bottom: none; display: inline-block; background-color: #007bff">
+    <div class="header-image" style="border-radius: 50%; width: 40px; margin-left: 5%; margin-top: 12px; float: left;">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Added.profile.image.url }} ">
+  </div>
+  <div class="header-name" style="width: 120px; float: left; margin-top: 10px;">
+    <h4 style="font-size: 20px; margin-left: 10px; color: #fff;">{{ friend.Added.username }}</h4>
+  </div>
+
+</div>
+<div class="chat-box" style="padding: 0 0 50px 0;">
+  <div class="chats" style="border: 1px solid #ccc; overflow: hidden; padding-bottom: 30px;">
+    <div class="msg-page" style="padding: 30px 15px 0 25px;">
+      <div class="msg-pagetwo" style="height: 516px; overflow-y: auto;">
+
+  {% for msgss in msgs %}
+  {% if msgss.sender != request.user %}
+  <div class="incoming-chat" style="">
+    <div class="incoming-chat-img" style="display: inline-block; width: 20px; float: left;">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Added.profile.image.url }}">
+    </div>
+    <div class="incoming-message" style="display: inline-block; padding: 0 0 0 10px; vertical-align: top; width: 92%;">
+    <div class="incoming-message-inbox" style="width: 57%;">
+      <p style="background: #efefef none repeat scroll 0 0; border-radius: 10px; color: #646464; font-size: 14px; margin: 0; padding: 5px 10px 5px 12px; width: 100%;">{{ msgss.msg }}</p>
+      <span style="color: #777; display: block; font-size: 12px; margin: 8px 0 0;">{{ msgss.time_sent }}</span>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+    {% if msgss.sender == request.user %}
+    <div class="outgoing-chat" style="overflow: hidden; margin: 26px 20px;">
+      
+    <div class="outgoing-message-inbox" style="float: left; width: 46%; margin-left: 45%;">
+        <p style="background: #007bff none repeat scroll 0 0; color: #fff; font-size: 14px; margin: 14px; width: 100%; padding: 5px 10px 5px 12px; border-radius: 10px;">{{ msgss.msg }}</p>
+      <span style="color: #777; display: block; font-size: 12px; margin: 8px 0 0;">{{ msgss.time_sent }}</span>
+    </div>
+    <div class="outgoing-chat-img" style="display: inline-block; width: 20px; float: right; ">
+      <img style="max-width: 100%; border-radius: 50%;" src="{{ friend.Accepter.profile.image.url }}">
+    </div>
+  </div>
+  {% endif %}
+  {% endfor %} 
+</div>
+</div>
+</div>
+</div>
+
+<div class="message-box" style="position: relative; height: 10px; background-color: #007bff; display:flex;">
+  <div class="message-input" style="float: right; margin-top: 13px; margin-right: 20px; outline: none !important; border-radius: 20px; width: 100% !important; background-color: #fff; ">
+  <form method="POST" class="form-signin">
+            {% csrf_token %}
+          <div style="width:80%; display:flex; border: none !important; border-radius: 20px !important;">
+            {{form}}
+     <div class="input-class-append" style="width:20rem;"> 
+
+    <div style="position:relative; right:30%;">
+      <button type="submit" style="width:10%; padding:5% 0 5% 15%;  background:transparent; border:none"><i class="fa fa-paper-plane"></i></button>
+    </div>
+
+  </div>
+</div>
+  </form>
+
+</div>
+</div>
+</div>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "posts/base.html" %}
+{% block content %}
+<div class="container">
+<div class="row">
+<div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+            {% for FriendRequest in FriendRequests %}
+          <div>
+            <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ FriendRequest.sender.profile.image.url }}">
+            <a class="mr-2" href="#">{{ FriendRequest.sender.username }}</a>
+            <div class="media-body">
+            <div class="article-metadata">
+            <button class="btn btn-sm btn-circle mt-1 mb-1" id="buttonTwo" value="{{ FriendRequest.sender.username }}">+</button>
+              </div>
+              </div>
+            </article>
+          </div>
+          {% endfor %}
+            </div>
+            </div>
+            </div>
+{% endblock content %}

@@ -1,0 +1,415 @@
+body {
+  background: #fafafa;
+  color: #333333;
+  margin: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #444444;
+}
+
+ul {
+  margin: 0;
+}
+
+
+
+
+
+
+.article-title {
+  color: #444444;
+}
+
+a.article-title:hover {
+  color: #428bca;
+  text-decoration: none;
+}
+
+.article-content {
+  white-space: pre-line;
+}
+
+.article-img {
+  height: 65px;
+  width: 65px;
+  margin-right: 16px;
+}
+
+.article-metadata {
+  padding-bottom: 1px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid #e3e3e3
+}
+
+.article-metadata a:hover {
+  color: #333;
+  text-decoration: none;
+}
+
+.article-svg {
+  width: 25px;
+  height: 25px;
+  vertical-align: middle;
+}
+
+.
+
+.mx-auto {
+  display: block;
+  text-align: center;
+  margin: 24px 0 12px 20px;
+}
+
+
+.navbar {
+  top: 0px;
+  width: 100%; /* Full-width */
+  background-color: #4B509C; /* Dark-grey background */
+  overflow: auto; /* Overflow due to float */
+}
+
+.navbar a {
+  float: left; /* Float links side by side */
+  text-align: center; /* Center-align text */
+  width: 20%; /* Equal width (5 icons with 20% width each = 100%) */
+  padding: 12px 0; /* Some top and bottom padding */
+  transition: all 0.3s ease; /* Add transition for hover effects */
+  color: white; /* White text color */
+  font-size: 36px; /* Increased font size */
+}
+
+.navbar a:hover {
+  background-color: #B9BDD4; /* Add a hover color */
+}
+
+
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.login-icon {
+    text-align: center;
+}
+
+I[type="header_icon"] {
+   text-align:center;
+}
+
+.form-signin {
+  width: 100%;
+  text-align: left;
+}
+
+
+.form-signin .btn {
+  font-size: 80%;
+  border-radius: 5rem;
+  letter-spacing: .1rem;
+  font-weight: bold;
+  padding: 1rem;
+  transition: all 0.2s;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  height: auto;
+  border-radius: 2rem;
+}
+
+.form-label-group>input,
+.form-label-group>label {
+  padding: var(--input-padding-y) var(--input-padding-x);
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 0;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::placeholder {
+  color: transparent;
+}
+
+.form-label-group input:not(:placeholder-shown) {
+  padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+  padding-bottom: calc(var(--input-padding-y) / 3);
+}
+
+.form-label-group input:not(:placeholder-shown)~label {
+  padding-top: calc(var(--input-padding-y) / 3);
+  padding-bottom: calc(var(--input-padding-y) / 3);
+  font-size: 12px;
+  color: #777;
+}
+
+
+.fa .fa-envelope .badge {
+
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  padding: 5px 10px;
+  border-radius: 50%;
+  background: red;
+  color: white;
+
+}
+
+.floating-btn {
+    width: 80px;
+    height: 80px;
+    background: #078ee8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border-radius: 50%;
+    color: #ffffff;
+    font-size: 40px;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0,0.25);
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    transition: background 0.25;
+
+}
+
+.floating-btn:active {
+    
+    background: #063657;
+
+
+}
+
+/* Fallback for Edge
+-------------------------------------------------- */
+
+@supports (-ms-ime-align: auto) {
+  .form-label-group>label {
+    display: none;
+  }
+  .form-label-group input::-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+/* Fallback for IE
+-------------------------------------------------- */
+
+@media all and (-ms-high-contrast: none),
+(-ms-high-contrast: active) {
+  .form-label-group>label {
+    display: none;
+  }
+  .form-label-group input:-ms-input-placeholder {
+    color: #777;
+  }
+}
+
+.btn-circle.btn-sm { 
+       width: 30px;
+       height: 30px;
+       padding: 6px 0px; 
+       border-radius: 15px; 
+       font-size: 8px; 
+       text-align: center; 
+} 
+
+.btn-circle.btn-md { 
+      width: 50px; 
+      height: 50px; 
+      padding: 7px 10px; 
+      border-radius: 25px; 
+      font-size: 10px; 
+      text-align: center; 
+} 
+
+.btn-circle.btn-xl { 
+      width: 70px;
+      height: 70px;
+      padding: 10px 16px; 
+      border-radius: 35px; 
+      font-size: 12px; 
+      text-align: center; 
+} 
+
+
+
+
+@font-face {
+  src:url('../fonts/Nunito.ttf');
+  font-family:Nunito;
+}
+
+
+
+/* Header */
+
+.contain{
+  display:flex;
+  background:transparent;
+  width:100%;
+  box-shadow:0 0 2px 0 grey;
+}
+.header_dp{
+  width:1.2rem;
+  height:1.2rem;
+  margin: 7% 1%;
+  border-radius:50%;
+}
+.nav_back_bar{
+  width:5%;
+  padding:4% 3%;
+  
+}
+.nav_back{
+  font-size:1.2rem;
+  margin:4% 0 0 0;
+}
+.header_name_bar{
+  width:60%;
+  display:flex;
+  overflow:hidden;
+  white-space:nowrap;
+}
+.header_user_name{
+  font-size:0.9rem;
+  text-overflow:ellipsis;
+  overflow: hidden;
+  font-weight:bold;
+}
+.top_icons_bar{
+  width:12%;
+  display:flex;
+  padding:4% 3%;
+}
+.top_icons{
+  font-size:1.2rem;
+  margin:0% 18%;
+  text-align:center;
+}
+
+/* Message Texts */
+.message_box{
+  display:block;
+}
+.recipient_bar{
+  display:flex;
+  margin-left:3%;
+  width:70%;
+  margin-top:1rem;
+}
+.recipient_dp{
+  width:1.5rem;
+  height:1.5rem;
+  border-radius:50%;
+  }
+border:1px solid black;
+.recipient_text{
+  background:#f2f2f2;
+  padding:2%;
+  border-radius:0.5rem;
+  margin:0 2%;
+  font-size:0.8rem;
+}
+.sender_bar{
+  margin-top:1rem;
+  text-align:right;
+}
+.sender_text{
+  display:inline-block;
+  position:relative;
+  right:2%;
+  max-width:70%;
+  margin-top:1rem;
+  margin-right:3%;
+  background: lightblue;
+  padding:3%;
+  border-radius:1rem;
+}
+
+/* Input section */
+.input_bar{
+  position:fixed;
+  bottom:2%;
+  display:flex;
+}
+.text_bar{
+  width:18rem;
+  margin-left:5%;
+}
+textarea{
+  width:100%;
+  outline:none;
+  font-size:1rem;
+  padding:1%;
+  border-radius:2rem;
+}
+.send_icon_bar{
+  width:10%;
+  display:flex;
+  position: relative;
+  right:22%;
+  bottom:0%;
+  margin-top:0.5rem;
+}
+.send_icon{
+  font-size:1.5rem;
+  margin:0 20%;
+}
+.emoji_icon_bar{
+  position: relative;
+  left:10%;
+  bottom:0%;
+  margin-top: 0.5rem;
+}
+.emoji_icon{
+  position; relative;
+  right:69%;
+  font-size:1.5rem;
+}
