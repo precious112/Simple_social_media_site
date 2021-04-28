@@ -50,7 +50,10 @@ def DisplayNewMessage(request):
             x=0
             if last and LastChats[x]  != None:
                 if last.time_sent > LastChats[x].time_sent:
-                    LastChats.pop(x)
+                    del LastChats[x]
+            
+            else:
+                del LastChats[x]
             x += 1
     
     

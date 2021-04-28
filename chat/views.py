@@ -20,7 +20,10 @@ def chatt(request):
             if FriendList.objects.filter(Accepter=request.user,Added=userr).exists():
                 result = FriendList.objects.get(Accepter=request.user,Added=userr)
             else:
-                result = FriendList.objects.get(Accepter=userr,Added=request.user)
+                try:
+                    result = FriendList.objects.get(Accepter=userr,Added=request.user)
+                except FriendList.DoesNotExist:
+                    redirect('chatt')
             
                 
                 

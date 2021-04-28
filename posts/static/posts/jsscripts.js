@@ -28,3 +28,20 @@ $(document).on('click', '#buttonTwo', function(){
   });
  
  });
+ 
+ $(document).on('click', '#liked', function(){
+
+  $.ajax({
+   url: '/posts/like/',
+   data: {
+   'serializedVall': $(this).attr("value")
+   },
+   type: "GET",
+   success: function(response) {
+$('#liked').hide();
+    
+   }
+  });
+ 
+ });
+

@@ -1,0 +1,26 @@
+{% extends "posts/base.html" %}
+{% block content %}
+<a href="http://www.google.com" class="material-icons floating-btn">add</a>
+<article class="article2" style="background-color: white;  border-radius: 5px; box-shadow: 0 2px 5px rgb(194, 193, 193);">
+	<div class="post" style="display: flex; background-color: white; border-radius: 5px; padding-top: 10px; padding-left: 15px;">
+		<div><img class="profile" src="{{ object.author.profile.image.url }}"></div>
+		<aside id="aside0" style="width: 125px;">
+		<div class="poster-name" style="font-weight: bold; margin-left: 10px; width: 165px; cursor: pointer;">{{ object.author.username }}</div>
+		<div class="post-notification" style="margin-left: 10px; display: flex; margin-top: 0;">
+		<div class="time" style="font-size: 13px; color: gray;">{{ object.date_of_release }}</div>
+		</div>	
+
+		</aside>
+		<p class="ellipse" style="font-size: bold; margin-left: 35px; margin-top: 0; cursor: pointer;">...</p>
+	</div>
+	<div class="pix" style="background-color: rgb(194, 190, 190); height: 220px; cursor: pointer;"><img src="{{ object.author.profile.image.url }}" class="user-pix" style="width: 400px; height: 400px; border-radius: 100%; margin-left: 60px; margin-right: 60px; margin-top: 15px; cursor: pointer;"></div>
+	<div class="result" style="display: flex; padding-top: 220px; font-family: sans-serif; font-size: small;">
+		<div class="border1" style="border-top: 2px solid rgb(231, 229, 229); display: flex; width: 100%;">
+			<div class="well" style="padding-top: 8px; padding-top: 8px; display: flex; color: gray;">
+				<div><i class="far fa-heart" style="width: auto; height: 15; margin-left: 50px; cursor: pointer;"></i><span class="num1" style="margin-left: 5px; cursor:pointer;">30</span></div>
+				<div><i class="fas fa-comment" style="width: auto; height: 15; margin-left: 50px; cursor: pointer;"></i><span class="num2" style="margin-left: 260px; cursor:pointer;>11</span></div>
+			</div>
+		</div>
+	</div>
+</article>
+{% endblock content %}

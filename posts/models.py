@@ -8,11 +8,18 @@ from django.urls import reverse
 class Posts(models.Model):
 	body= models.TextField()
 	author=models.ForeignKey(User,on_delete=models.CASCADE)
-	date_of_release= models.DateTimeField()
+	date_of_release= models.DateTimeField(default=timezone.now)
 	post_image= models.ImageField(upload_to='post_imgs')
+	like= models.ManyToManyField(User,related_name='likes', blank=True)
 	
 	def get_absolute_url(self):
-		return reverse('posts-detail', kwargs={'pk': self.pk})
+		return reverse('post-detail', kwargs={'pk': self.pk})
+
+	def save(self):
+		super().save()
+
+		img= Image.open(self.post_image.path)
+		img.save(self.post_image.path)
 	
 class Comment(models.Model):
 	post= models.ForeignKey(Posts,on_delete=models.CASCADE, related_name='comments')

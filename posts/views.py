@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+import json
 from .models import Posts
 from datetime import datetime, timedelta
 import time
@@ -12,10 +13,15 @@ from django.views.generic import (
     UpdateView,
     DeleteView
 )
+from django.forms.models import model_to_dict 
+from django.http import JsonResponse
+
+
 # Create your views here.
 #views.py code for news feed feature
 def NewsFeed(request):
     ArrangedPosts=queue()
+    counter=1
     friends=[]
     friendpost=[]
     postsArray=[]
@@ -38,27 +44,26 @@ def NewsFeed(request):
                 Fposts= Posts.objects.filter(author=F)
                 for post in Fposts:
                     postsArray.append(post)
-            friendpost= list(postsArray)
-            for i in range(0,len(friendpost)):
-                for j in range(0,len(postsArray)):
-                    ArrangedPosts.enqueue(friendpost[i][j])
+
+            for post in postsArray:
+                ArrangedPosts.enqueue(post)
                     
             while not ArrangedPosts.isEmpty():
                 postList.append(ArrangedPosts.front())
                 ArrangedPosts.dequeue()
-            break
+            break    
                 
-        for i in range(5):
-            friendpost.append(friends[i])
+        while counter != 5:
+            for i in friends:
+                friendpost.append(i)
         
         for F in friendpost:
-                Fposts= posts.objects.filter(author=F)
-                for post in Fposts:
-                    postsArray.append(post)
-        friendpost= list(postsArray)
-        for i in range(0,len(friendpost)):
-                for j in range(0,len(postsArray)):
-                    ArrangedPosts.enqueue(friendpost[i][j])
+            Fposts= Posts.objects.filter(author=F)
+            for post in Fposts:
+                postsArray.append(post)
+        
+        for post in postsArray:
+            ArrangedPosts.enqueue(post)
                     
         while not ArrangedPosts.isEmpty():
                 postList.append(ArrangedPosts.front())
@@ -79,34 +84,33 @@ def NewsFeed(request):
     return render(request, 'posts/home.html', context)
 
 
-def postDetail(request,pk):
+def postDetail(request, pk):
     post= get_object_or_404(Posts, pk=pk)
-    comments= posts.comments.all()
-    com=None
+    comments= post.comments.all()
     
     if request.method =='POST':
         form= CommentForm(request.POST, requests.FILES)
         if form.is_valid():
+            form.instance.by= request.user
             com= form.save(commit=False)
             com.post=post
             com.save()
-            #return redirect('')
+            return redirect('post-detail',pk=post.pk)
             messages.success(request, f'Commment successful')
         else:
             form= CommentForm()
-        context = {
+    context = {
             'post':post,
-            'com':com,
-            'form':form,
             'comments':comments
-            
             }
+    return render(request, 'posts/post-detail.html', context)
 
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Posts
-    fields = ['body']
+    template_name='posts/post-form.html'
+    fields = ['body','post_image']
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -130,6 +134,7 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Posts
+    template_name='posts/post-delete.html'
     success_url = '/'
 
     def test_func(self):
@@ -137,3 +142,22 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+def like_post(request):
+
+    if request.method == 'GET':
+        i=0
+        like= request.GET.get('serializedVall')
+        liker= Posts.objects.get(pk=like)
+        if liker.like.filter(pk=request.user.pk).exists():
+            liker.like.remove(request.user)
+        else:
+            liker.like.add(request.user)
+        for j in liker.like.all():
+            i=i+1
+        
+        return JsonResponse({'like':i}, status=200)
+    else:
+        return JsonResponse({}, status=400)
+
+
+
