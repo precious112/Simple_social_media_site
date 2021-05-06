@@ -9,5 +9,5 @@ class message(forms.ModelForm):
         model = Chat
         fields= ['msg']
         widgets= {
-        'msg': forms.TextInput(attrs={'placeholder':'write message...','class': 'form-control'}),
+        'msg': forms.Textarea(attrs={'placeholder':'write message...','class': 'form-control form-control-lg','autocomplete':'off','rows':'1','cols':'1'}),
         }

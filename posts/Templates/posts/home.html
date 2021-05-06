@@ -21,10 +21,10 @@
 	<div>
 	<img class="rounded mx-auto" style="width:100%; height:20rem;" src="{{ post.post_image.url }}">
 	</div>
-	<!-- <div style="display:flex;">
-		<div style="margin-left: 5rem;"><button id="liked" value="{{ post.pk }}"><i class="far fa-heart" style="background-color: white;"></i></button><span id="NumLike">11</span></div>
-		<div style="margin-left: 10rem;"><i class="far fa-comment"></i><span>11</span></div>
-	</div> -->
+	<div style="display:flex;">
+<div style="margin-left: 5rem;"><button class="btn btn-link text-dark p-0 border-0 btn-outline-light">{% if post.like_count == 0 %}<i class="far fa-heart posts" value="{{ post.pk }}" style="background-color: white;"></i>{% else %}<i class="far fa-heart posts" value="{{ post.pk }}" style="background-color: white;">{{ post.like_count }}</i>{% endif  %}</button></div>
+		<div style="margin-left: 10rem;"><i class="far fa-comment"></i><span>{{ NumComment }}</span></div>
+	</div>
 
   </div>
 

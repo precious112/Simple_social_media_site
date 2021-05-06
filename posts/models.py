@@ -11,6 +11,7 @@ class Posts(models.Model):
 	date_of_release= models.DateTimeField(default=timezone.now)
 	post_image= models.ImageField(upload_to='post_imgs')
 	like= models.ManyToManyField(User,related_name='likes', blank=True)
+	like_count= models.BigIntegerField(default=0)
 	
 	def get_absolute_url(self):
 		return reverse('post-detail', kwargs={'pk': self.pk})

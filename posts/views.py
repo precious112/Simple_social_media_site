@@ -68,14 +68,17 @@ def NewsFeed(request):
         while not ArrangedPosts.isEmpty():
                 postList.append(ArrangedPosts.front())
                 ArrangedPosts.dequeue()
-                
+
+        
+        
+
         time.sleep(72000) 
        
         for F in postList:
             if F.date_of_release > datetime.now()+timedelta(hours=48):
                 postList.remove(F)
         
-                
+    postList.reverse()            
     context= {
             
             'postList':postList,
@@ -87,9 +90,9 @@ def NewsFeed(request):
 def postDetail(request, pk):
     post= get_object_or_404(Posts, pk=pk)
     comments= post.comments.all()
-    
+    NumComment= comments.count()
     if request.method =='POST':
-        form= CommentForm(request.POST, requests.FILES)
+        form= CommentForm(request.POST, request.FILES)
         if form.is_valid():
             form.instance.by= request.user
             com= form.save(commit=False)
@@ -97,11 +100,13 @@ def postDetail(request, pk):
             com.save()
             return redirect('post-detail',pk=post.pk)
             messages.success(request, f'Commment successful')
-        else:
-            form= CommentForm()
+    else:
+        form= CommentForm()
     context = {
             'post':post,
-            'comments':comments
+            'comments':comments,
+            'form':form,
+            'NumComment':NumComment
             }
     return render(request, 'posts/post-detail.html', context)
 
@@ -143,19 +148,30 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 def like_post(request):
-
     if request.method == 'GET':
+        result=''
+        col='red'
+        lat='fas'
+        odd='far'
         i=0
         like= request.GET.get('serializedVall')
         liker= Posts.objects.get(pk=like)
         if liker.like.filter(pk=request.user.pk).exists():
             liker.like.remove(request.user)
+            liker.like_count -= 1
+            result= liker.like_count
+            liker.save()
+            col=''
+            lat='far'
+            odd='fas'
         else:
             liker.like.add(request.user)
-        for j in liker.like.all():
-            i=i+1
-        
-        return JsonResponse({'like':i}, status=200)
+            liker.like_count += 1
+            result= liker.like_count
+            liker.save()
+        if result == 0:
+            result=''
+        return JsonResponse({'result':result,'col':col,'lat':lat,'odd':odd}, status=200)
     else:
         return JsonResponse({}, status=400)
 
