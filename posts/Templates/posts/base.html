@@ -21,6 +21,7 @@
     {% endif %}
 </head>
 <body>
+  {% if user.is_authenticated %}
     <header class="site-header">
       <div class="navbar">
   <a href="{% url 'posts-home'%}"><i class="fa fa-home"></i></a>
@@ -38,6 +39,7 @@
   <a href="{% url 'profile' %}"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
 </div>
     </header>
+    {% endif %}
     <main role="main" class="container">
       <div class="row">
         <div class="col-md-8">
